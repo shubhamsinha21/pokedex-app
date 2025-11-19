@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { Image, ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 
 interface Pokemon {
   name: string;
   image: string;  
+  imageBack: string;
+  types: PokemonType[];
+}
+
+interface PokemonType {
+  type:{
+    name:string,
+    url:string
+  }
 }
 
 export default function Index() {
@@ -12,6 +21,7 @@ export default function Index() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]) // empty array as initial state
   // list of type of pokemons "Pokemon"
 
+  console.warn(JSON.stringify(pokemons[0], null, 1));
   useEffect(() => {
     //fetch pokemons
     fetchPokemons();
@@ -37,6 +47,8 @@ export default function Index() {
             return {
               name: pokemon.name,
               image: details.sprites.front_default,
+              imageBack: details.sprites.back_default,
+              types:details.types
             };
           } catch (error) {
             // if api fetch fails, skip this pokemon
@@ -57,10 +69,23 @@ export default function Index() {
     <ScrollView style={{ padding: 20, }}>
      {pokemons.map((pokemon) => (
       <View key={pokemon.name} style={{ marginBottom: 10, padding: 10, backgroundColor: '#fff', borderRadius: 5 }}  >
-        <Text>{pokemon.name}</Text>
-          <Image source={{ uri: pokemon.image }} style={{ width: 100, height: 100 }} />
+        <Text style={styles.name}>{pokemon.name}</Text>
+        <Text style={{textTransform: "capitalize"}}>({pokemon.types[0].type.name})</Text>
+        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+          <Image source={{ uri: pokemon.image }} style={{ width:150, height: 150 }} />
+          <Image source={{ uri: pokemon.imageBack }} style={{ width: 150, height: 150 }} />
+        </View>
+          
       </View>
      ))}
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  name:{
+    fontSize: 20,
+    fontWeight: 800,
+    textTransform: "uppercase"
+  },
+})
