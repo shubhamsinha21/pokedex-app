@@ -16,6 +16,29 @@ interface PokemonType {
   }
 }
 
+// based on type, we can set different background colors or styles
+const colorByType = {
+  normal: "#A8A77A",
+  fire: "#EE8130",
+  water: "#6390F0",
+  electric: "#F7D02C",
+  grass: "#7AC74C",
+  ice: "#96D9D6",
+  fighting: "#C22E28",
+  poison: "#A33EA1",
+  ground: "#E2BF65",
+  flying: "#A98FF3",
+  psychic: "#F95587",
+  bug: "#A6B91A",
+  rock: "#B6A136",
+  ghost: "#735797",
+  dragon: "#6F35FC",
+  dark: "#705746",
+  steel: "#B7B7CE",
+  fairy: "#D685AD",
+};
+
+
 export default function Index() {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]) // empty array as initial state
@@ -30,7 +53,7 @@ export default function Index() {
 
   async function fetchPokemons() {
     try {
-      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10');
+      const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
       const data = await response.json();
 
       // fetch detailed info for each pokemon in parallel
@@ -66,11 +89,20 @@ export default function Index() {
   }
 
   return (
-    <ScrollView style={{ padding: 20, }}>
+    <ScrollView 
+    contentContainerStyle={{ gap:16, padding:16 }} // scrollview takes a property called - contentContainerStyle
+    style={{ padding: 20}}> 
+    
      {pokemons.map((pokemon) => (
-      <View key={pokemon.name} style={{ marginBottom: 10, padding: 10, backgroundColor: '#fff', borderRadius: 5 }}  >
+      <View key={pokemon.name} 
+      style={{ 
+        // @ts-ignore
+        backgroundColor: colorByType[pokemon.types[0].type.name] + 50,
+        padding:20,
+        borderRadius:20
+      }}  >
         <Text style={styles.name}>{pokemon.name}</Text>
-        <Text style={{textTransform: "capitalize"}}>({pokemon.types[0].type.name})</Text>
+        <Text style={styles.type}>({pokemon.types[0].type.name})</Text>
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
           <Image source={{ uri: pokemon.image }} style={{ width:150, height: 150 }} />
           <Image source={{ uri: pokemon.imageBack }} style={{ width: 150, height: 150 }} />
@@ -86,6 +118,14 @@ const styles = StyleSheet.create({
   name:{
     fontSize: 20,
     fontWeight: 800,
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    textAlign: "center",
   },
+  type:{
+    fontSize:20,
+    fontWeight:"bold",
+    color:"gray",
+    textAlign:"center",
+    textTransform:"capitalize"
+  }
 })
