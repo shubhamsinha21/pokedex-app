@@ -30,6 +30,8 @@ export default function Index() {
             const res = await fetch(pokemon.url);
 
             const details = await res.json();
+
+            // if there is no image, skip this pokemon
             if (!details.sprites?.front_default) return null;
 
             return {
@@ -37,6 +39,7 @@ export default function Index() {
               image: details.sprites.front_default,
             };
           } catch (error) {
+            // if api fetch fails, skip this pokemon
             return null;
           }
         })
