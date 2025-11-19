@@ -51,7 +51,6 @@ export default function Index() {
     fetchPokemons();
   }, []);
 
-
   async function fetchPokemons() {
     try {
       const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
@@ -103,14 +102,14 @@ export default function Index() {
       style={{ 
         // @ts-ignore
         backgroundColor: colorByType[pokemon.types[0].type.name] + 50,
-        padding:20,
-        borderRadius:20
+        padding:40,
+        borderRadius:10
       }}  >
         <Text style={styles.name}>{pokemon.name}</Text>
         <Text style={styles.type}>({pokemon.types[0].type.name})</Text>
         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-          <Image source={{ uri: pokemon.image }} style={{ width:150, height: 150 }} />
-          <Image source={{ uri: pokemon.imageBack }} style={{ width: 150, height: 150 }} />
+          <Image source={{ uri: pokemon.image }} style={{ width:110, height: 110 }} />
+          <Image source={{ uri: pokemon.imageBack }} style={{ width: 110, height: 110 }} />
         </View>
           
       </View>
