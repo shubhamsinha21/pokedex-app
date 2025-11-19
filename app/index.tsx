@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
@@ -44,7 +45,7 @@ export default function Index() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]) // empty array as initial state
   // list of type of pokemons "Pokemon"
 
-  console.warn(JSON.stringify(pokemons[0], null, 1));
+  // console.warn(JSON.stringify(pokemons[0], null, 1));
   useEffect(() => {
     //fetch pokemons
     fetchPokemons();
@@ -94,7 +95,10 @@ export default function Index() {
     style={{ padding: 20}}> 
     
      {pokemons.map((pokemon) => (
-      <View key={pokemon.name} 
+    <Link key={pokemon.name} 
+    href={"/details"} // we can pass like this or an object with path
+    >
+      <View
       style={{ 
         // @ts-ignore
         backgroundColor: colorByType[pokemon.types[0].type.name] + 50,
@@ -109,6 +113,7 @@ export default function Index() {
         </View>
           
       </View>
+    </Link>
      ))}
     </ScrollView>
   );
