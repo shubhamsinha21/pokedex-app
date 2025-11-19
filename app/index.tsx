@@ -96,7 +96,8 @@ export default function Index() {
     
      {pokemons.map((pokemon) => (
     <Link key={pokemon.name} 
-    href={"/details"} // we can pass like this or an object with path
+    // href={"/details"} // we can pass like this or an object with path
+    href={{ pathname: "/details", params: { name: pokemon.name } }}
     >
       <View
       style={{ 
