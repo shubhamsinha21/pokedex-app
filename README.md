@@ -68,7 +68,20 @@ npx expo start
 ---
 
 ## ✅ Project structure
+```
+
 app/
 │── index.tsx          → Pokémon list screen
 │── details.tsx        → Pokémon details screen
 assets/                → Icons, splash images, etc.
+
+```
+
+---
+
+## 🔗 API Used
+
+PokéAPI
+https://pokeapi.co/api/v2/pokemon
+
+
