@@ -8,7 +8,7 @@ The app fetches data from the **PokéAPI** and displays a list of Pokémon along
 
 ## 🎥 Demo Video
 
-👉 *Add your video link here*
+👉 *https://github.com/user-attachments/assets/6aa8e4f6-bc78-460d-9bee-cea4a2d320b8*
 
 ---
 
@@ -63,7 +63,9 @@ npm install
 
 ### 3. Start the app
 npx expo start
+```
 
+---
 
 ## ✅ Project structure
 app/
